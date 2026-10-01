@@ -1,0 +1,4 @@
+let connection:Promise<IDBDatabase>|undefined;
+function db(){return connection??=new Promise<IDBDatabase>((resolve,reject)=>{const request=indexedDB.open('muse-market',1);request.onupgradeneeded=()=>request.result.createObjectStore('state');request.onsuccess=()=>resolve(request.result);request.onerror=()=>{connection=undefined;reject(request.error)}})}
+export async function readDemo(){const database=await db();return new Promise<unknown>((resolve,reject)=>{const request=database.transaction('state').objectStore('state').get('demo');request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error)})}
+export async function writeDemo(value:unknown){const database=await db();return new Promise<void>((resolve,reject)=>{const tx=database.transaction('state','readwrite');tx.objectStore('state').put(value,'demo');tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error)})}
