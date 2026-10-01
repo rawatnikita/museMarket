@@ -35,6 +35,8 @@ This project uses React, TypeScript and the Vinext compatibility runtime with a 
 
 ## GitHub and deployment
 
+User research form: https://tally.so/r/VLKYog
+
 GitHub repository: https://github.com/rawatnikita/museMarket
 
 Live prototype: https://muse-market.nikitarawat059.chatgpt.site
